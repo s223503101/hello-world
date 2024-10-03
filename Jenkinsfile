@@ -2,14 +2,15 @@ pipeline {
     agent any
 
     environment {
-        NODE_VERSION = 'NODE_VERSION'  // Use the configured name from your Jenkins global tool configuration
+        // Ensure the exact tool name matches your global tool configuration
+        NODE_VERSION = 'NODE_VERSION'  // This should be the exact name of the NodeJS installation
     }
 
     stages {
         stage('Install Node.js') {
             steps {
                 script {
-                    // Referencing the Node.js tool configuration in Jenkins by the name 'NODE_VERSION'
+                    // Reference the Node.js installation
                     def nodeJs = tool name: 'NODE_VERSION', type: 'NodeJSInstallation'
                     env.PATH = "${nodeJs}\\bin;${env.PATH}" // Adjusting the PATH for Windows
                 }
