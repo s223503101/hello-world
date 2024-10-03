@@ -1,4 +1,5 @@
 import { ESLint } from "eslint";
+import typescriptEslintPlugin from "@typescript-eslint/eslint-plugin";
 
 export default [
   {
@@ -7,11 +8,10 @@ export default [
       parser: '@typescript-eslint/parser',  // Use the TypeScript parser
     },
     plugins: {
-      '@typescript-eslint': require('@typescript-eslint/eslint-plugin'),  // Use the ESLint plugin for TypeScript
+      '@typescript-eslint': typescriptEslintPlugin,  // Use the ESLint plugin for TypeScript
     },
     rules: {
-      // Add your custom rules here
-      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-unused-vars': 'warn',  // Example custom rule
     },
   },
 ];
