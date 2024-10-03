@@ -5,6 +5,8 @@ pipeline {
         // Define environment variables
         NODE_VERSION = '16.x' // Specify your Node.js version here
     }
+
+    stages {
         stage('Install Node.js') {
             steps {
                 // Install Node.js if required
