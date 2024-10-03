@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Install Dependencies') {
             steps {
-                // Install the project's dependencies using npm (on Windows)
+                // Install the project's dependencies including ESLint
                 bat 'npm install'
             }
         }
@@ -20,9 +20,16 @@ pipeline {
             }
         }
 
+        stage('Lint Code with ESLint') {
+            steps {
+                // Run ESLint to check for code quality and style issues
+                bat 'npx eslint .'
+            }
+        }
+
         stage('Run Tests') {
             steps {
-                // Run the React app tests with `--passWithNoTests` to avoid failure if no tests are found
+                // Run the React app tests (on Windows)
                 bat 'npm test -- --watchAll=false --passWithNoTests'
             }
         }
