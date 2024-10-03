@@ -4,14 +4,14 @@ pipeline {
     stages {
         stage('Install Dependencies') {
             steps {
-                // Install the project's dependencies including ESLint
+                // Install dependencies including ESLint and TypeScript ESLint plugins
                 bat 'npm install'
             }
         }
 
         stage('Build') {
             steps {
-                // Build the React app for production (on Windows)
+                // Build the React app for production
                 bat 'npm run build'
 
                 // Archive the build folder as a zip file
@@ -22,14 +22,14 @@ pipeline {
 
         stage('Lint Code with ESLint') {
             steps {
-                // Run ESLint to check for code quality and style issues
+                // Run ESLint with the flat config system for code analysis
                 bat 'npx eslint .'
             }
         }
 
         stage('Run Tests') {
             steps {
-                // Run the React app tests (on Windows)
+                // Run the React app tests
                 bat 'npm test -- --watchAll=false --passWithNoTests'
             }
         }
@@ -37,7 +37,7 @@ pipeline {
 
     post {
         always {
-            // Clean up workspace after the build
+            // Clean up the workspace
             cleanWs()
         }
     }
