@@ -1,22 +1,7 @@
 pipeline {
     agent any
 
-    environment {
-        // Ensure the exact tool name matches your global tool configuration
-        NODE_VERSION = 'NODE_VERSION'  // This should be the exact name of the NodeJS installation
-    }
-
     stages {
-        stage('Install Node.js') {
-            steps {
-                script {
-                    // Reference the Node.js installation
-                    def nodeJs = tool name: 'NODE_VERSION', type: 'NodeJSInstallation'
-                    env.PATH = "${nodeJs}\\bin;${env.PATH}" // Adjusting the PATH for Windows
-                }
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 // Install the project's dependencies using npm (on Windows)
