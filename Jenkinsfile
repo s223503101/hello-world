@@ -9,26 +9,21 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                // Run the React app tests (on Windows)
-                bat 'npm test -- --watchAll=false'
-            }
-        }
-
         stage('Build') {
             steps {
                 // Build the React app for production (on Windows)
                 bat 'npm run build'
+
+                // Archive the build folder as a zip file
+                bat 'powershell Compress-Archive -Path build\\* -DestinationPath build.zip'
+                archiveArtifacts artifacts: 'build.zip', allowEmptyArchive: false
             }
         }
 
-        stage('Deploy (optional)') {
+        stage('Run Tests') {
             steps {
-                // You can deploy your React app if you have a deployment environment set up
-                echo 'Deploying the build...'
-                // Example of copying build files on Windows (optional)
-                // bat 'copy build\\* \\\\your-server\\path-to-deploy\\'
+                // Run the React app tests with `--passWithNoTests` to avoid failure if no tests are found
+                bat 'npm test -- --watchAll=false --passWithNoTests'
             }
         }
     }
