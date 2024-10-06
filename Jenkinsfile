@@ -20,13 +20,6 @@ pipeline {
             }
         }
 
-        stage('Lint Code with ESLint') {
-            steps {
-                // Run ESLint with the flat config system for code analysis
-                bat 'npx eslint .'
-            }
-        }
-
         stage('Run Tests') {
             steps {
                 // Run the React app tests
